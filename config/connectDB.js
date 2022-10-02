@@ -6,7 +6,7 @@ function connectDB() {
     useUnifiedTopology: true,
   };
   mongoose
-    .connect(process.env.MONGO_URL, opts)
+    .connect("mongodb://127.0.0.1:27017/Users", opts)
     .then(() => console.log("database Connected succesfully"))
     .catch((err) => console.log(err));
 }

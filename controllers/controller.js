@@ -8,7 +8,7 @@ exports.listUsers = (req, res) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.status(200).json(user);
+    res.status(200).send(user);
   });
 };
 
@@ -27,7 +27,7 @@ exports.createUser = (req, res) => {
 
 //update user
 exports.updateUser = (req, res) => {
-  const id = req.params.userID;
+  const id = req.params.id;
   User.findByIdAndUpdate(id, req.body, { new: true })
     .then((User) => {
       if (!User) {
@@ -40,15 +40,13 @@ exports.updateUser = (req, res) => {
 
 
 //delete user
-exports.deleteUser = (req, res) => {
-  const id = req.params.userID;
-  console.log(id);
-  User.findByIdAndDelete(id)
-    .then((User) => {
-      if (!User) {
-        return res.status(404).send({ msg: "User Not Found " });
-      }
-      res.status(200).send({ msg: "User was deleteed" });
-    })
-    .catch((err) => res.status(400).send({ msg: "ERROR" }));
+exports.deleteUser =  (req, res) => {
+  const id = req.params.id;
+  User.findByIdAndDelete(id, function (err, docs) {
+    if (err){
+        res.send(err)
+    }
+    else{
+      res.status(200).send(docs)}
+});
 };

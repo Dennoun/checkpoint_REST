@@ -1,9 +1,20 @@
-"use strict";
+'use strict';
 
-module.exports = function (app) {
-  var user = require("../controllers/controller");
+// create App function
+    module.exports = function(app) {
+        var todoList = require('../controllers/controller');
 
-  app.route("/users").get(user.listUsers).post(user.createUser);
+// todoList Routes
 
-  app.route("/users/:id").put(user.updateUser).delete(user.deleteUser);
-};
+// get and post request for /todos endpoints
+        app
+        .route("/users")
+        .get(todoList.listUsers)
+        .post(todoList.createUser);
+
+// put and delete request for /todos endpoints
+        app
+        .route("/user/:id")
+        .put(todoList.updateUser)
+        .delete(todoList.deleteUser);
+    };

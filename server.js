@@ -1,10 +1,18 @@
 const express = require("express");
 const app = express();
-
-require("dotenv").config({ path: "./config/.env" });
+const  bodyParser = require("body-parser");
+// use bodyParser middleware on express app
+app.use(bodyParser.urlencoded({ extended:true }));
+app.use(bodyParser.json());
+// require("dotenv").config({ path: "./config/.env" });
 require("./config/connectDB");
-//json middelware
-app.use(express.json());
+
+
+// create express app
+
+// define port to run express app
+const  port = 3000;
+
 
 
 
@@ -12,6 +20,6 @@ app.use(express.json());
 var routes = require('./routes/Route'); //importing route
 routes(app);
 
-app.listen(process.env.Port, () => {
-  console.log(`The Server is Running ${process.env.Port}....`);
+app.listen(port, () => {
+  console.log(`The Server is Running ${port}....`);
 });
